@@ -10,6 +10,6 @@ class Google:
         direction_result = self.client.directions(start_place, end_place)
         data_result = direction_result[0]
         data_legs = data_result["legs"][0]
-        start_location: dict[str, float] = data_legs["end_location"]
+        start_location: dict[str, float] = data_legs["start_location"]
         end_location: dict[str, float]  = data_legs["end_location"]
         return start_location, end_location
