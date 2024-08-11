@@ -4,4 +4,11 @@
       "editor.formatOnSave": true
   },
   "python.analysis.typeCheckingMode": "strict",
+  "[vue]": {
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+      },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 }
