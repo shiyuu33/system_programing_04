@@ -3,14 +3,17 @@ import { Restaurant } from '@/services/restaurant'
 import { ref } from 'vue'
 
 const isLoading = ref<false>()
-const statPlace = ref<string>('')
+const startPlace = ref<string>('')
 const endPlace = ref<string>('')
 const results = ref<string[]>([])
 
 const handleSearch = async () => {
   isLoading.value = true
   const restaurantService = new Restaurant()
-  results.value = await restaurantService.getRestaurantsShopList()
+  results.value = await restaurantService.getRestaurantsShopList({
+    startPlace: startPlace.value,
+    endPlace: endPlace.value
+  })
   isLoading.value = false
 }
 </script>
@@ -19,7 +22,7 @@ const handleSearch = async () => {
   <div class="flex flex-col items-center p-6" style="background-color: #f8f9fa; min-height: 100vh">
     <div class="flex w-full max-w-lg space-x-4">
       <input
-        v-model="statPlace"
+        v-model="startPlace"
         type="text"
         placeholder="始点"
         class="w-1/2 rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2"
