@@ -10,7 +10,7 @@ class Restaurant:
         'key': self.key,
         'lat': lat,
         'lng': lng,
-        'order': 4,
+        'range': 2,
         'format':'json',
         }
         response = requests.get(f"{self.url}", params)
