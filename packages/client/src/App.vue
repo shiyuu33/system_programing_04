@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import { Restaurant } from '@/services/restaurant'
 import { ref } from 'vue'
 
+const isLoading = ref<false>()
 const statPlace = ref<string>('')
 const endPlace = ref<string>('')
-const results = ref<string[]>(['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff', 'ggg', 'hhh'])
+const results = ref<string[]>([])
 
-const handleSearch = () => {}
+const handleSearch = async () => {
+  isLoading.value = true
+  const restaurantService = new Restaurant()
+  results.value = await restaurantService.getRestaurantsShopList()
+  isLoading.value = false
+}
 </script>
 
 <template>
@@ -35,17 +42,25 @@ const handleSearch = () => {}
       中間地点のお店を検索
     </button>
 
-    <ul class="mt-8 w-full max-w-lg space-y-4">
+    <ul v-if="!isLoading" class="mt-8 w-full max-w-lg space-y-4">
       <li
         v-for="(result, index) in results"
         :key="index"
-        class="rounded-lg border-2 p-4 shadow-md transition-shadow duration-200 hover:shadow-lg"
+        class="rounded-lg border-2 shadow-md transition-shadow duration-200 hover:shadow-lg"
         style="border-color: #242323; background-color: #ffffff"
       >
-        <div class="text-lg font-bold" style="color: #242323">{{ result }}</div>
-        <p class="mt-1 text-sm" style="color: #242323">
-          This is a brief description of {{ result }}.
-        </p>
+        <a
+          class="flex w-full items-center gap-4 p-4"
+          :href="result.urls.pc"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img class="inline-block shrink-0" :src="result.logo_image" />
+          <div>
+            <div class="text-lg font-bold" style="color: #242323">{{ result.name }}</div>
+            <p class="mt-1 text-sm" style="color: #242323">{{ result.address }}.</p>
+          </div>
+        </a>
       </li>
     </ul>
   </div>
