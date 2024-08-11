@@ -2,8 +2,8 @@
 
 ## Environment
 
-Python: v3.12
-package manager: venv
+- Python: v3.12
+- package manager: venv
 
 ## Setup
 

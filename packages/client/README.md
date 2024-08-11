@@ -2,8 +2,8 @@
 
 ## Environment
 
-node: v20.12.2
-pnpm: 8.15.8
+- node: v20.12.2
+- pnpm: 8.15.8
 
 ## Setup
 
